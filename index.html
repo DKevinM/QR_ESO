@@ -15,16 +15,16 @@
 </head>
 <body>
     <div class="container">
-        <h1>Edmonton AQHI</h1>
+        <h1>Devon (Genesee) AQHI</h1>
         <div id="communityAqhi" class="communityAqhi">Loading Community AQHI...</div>
         <div id="communityReadingDate" class="communityAqhi"></div>
         <div id="communityForecastToday" class="communityAqhi"></div>
         <div id="communityForecastTonight" class="communityAqhi"></div>
         <div id="communityForecastTomorrow" class="communityAqhi"></div>
 
-        <h1>Edmonton McCauley</h1>
-        <div id="mccauleyAqhi" class="aqhi">Loading AQHI...</div>
-        <div id="mccauleyReadingDate" class="aqhi"></div>
+        <h1>Devon (Genesee)</h1>
+        <div id="geneseeAqhi" class="aqhi">Loading AQHI...</div>
+        <div id="geneseeReadingDate" class="aqhi"></div>
 
         <h1>PurpleAir Sensors</h1>
         <div id="purpleAirData1" class="purpleair">Loading PurpleAir Data for Sensor 1...</div>
@@ -51,42 +51,42 @@
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const edmontonCommunityData = data.value.find(community => community.CommunityName === "Edmonton");
-                if (edmontonCommunityData) {
-                    document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(edmontonCommunityData.Aqhi)}`;
-                    document.getElementById('communityReadingDate').innerText = new Date(edmontonCommunityData.ReadingDate).toLocaleString();
-                    document.getElementById('communityForecastToday').innerText = `Forecast Today: ${edmontonCommunityData.ForecastToday}`;
-                    document.getElementById('communityForecastTonight').innerText = `Forecast Tonight: ${edmontonCommunityData.ForecastTonight}`;
-                    document.getElementById('communityForecastTomorrow').innerText = `Forecast Tomorrow: ${edmontonCommunityData.ForecastTomorrow}`;
+                const GeneseeCommunityData = data.value.find(community => community.CommunityName === "Genesee");
+                if (GeneseeCommunityData) {
+                    document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(GeneseeCommunityData.Aqhi)}`;
+                    document.getElementById('communityReadingDate').innerText = new Date(GeneseeCommunityData.ReadingDate).toLocaleString();
+                    document.getElementById('communityForecastToday').innerText = `Forecast Today: ${GeneseeCommunityData.ForecastToday}`;
+                    document.getElementById('communityForecastTonight').innerText = `Forecast Tonight: ${GeneseeCommunityData.ForecastTonight}`;
+                    document.getElementById('communityForecastTomorrow').innerText = `Forecast Tomorrow: ${GeneseeCommunityData.ForecastTomorrow}`;
                 }
             } catch (error) {
                 console.error('Error fetching Community AQHI data:', error);
             }
         }
 
-        // Fetch Edmonton McCauley AQHI data
-        async function fetchMccauleyAQHI() {
+        // Fetch Genesee genesee AQHI data
+        async function fetchgeneseeAQHI() {
             const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const edmontonMcCauleyData = data.value.find(station => station.StationName === "Edmonton McCauley");
-                if (edmontonMcCauleyData) {
-                    const validatedAQHI = validateAQHI(edmontonMcCauleyData.Aqhi);
-                    document.getElementById('mccauleyAqhi').innerText = `AQHI: ${validatedAQHI}`;
-                    document.getElementById('mccauleyReadingDate').innerText = new Date(edmontonMcCauleyData.ReadingDate).toLocaleString();
-                    sendToMap('mccauley', {...edmontonMcCauleyData, Aqhi: validatedAQHI });
+                const GeneseegeneseeData = data.value.find(station => station.StationName === "Genesee");
+                if (GeneseegeneseeData) {
+                    const validatedAQHI = validateAQHI(GeneseegeneseeData.Aqhi);
+                    document.getElementById('geneseeAqhi').innerText = `AQHI: ${validatedAQHI}`;
+                    document.getElementById('geneseeReadingDate').innerText = new Date(GeneseegeneseeData.ReadingDate).toLocaleString();
+                    sendToMap('genesee', {...GeneseegeneseeData, Aqhi: validatedAQHI });
                 }
             } catch (error) {
-                console.error('Error fetching McCauley AQHI data:', error);
+                console.error('Error fetching genesee AQHI data:', error);
             }
         }
 
         // Fetch and process PurpleAir data
         async function fetchPurpleAirData() {
             const API_KEY = 'ED3E067C-0904-11ED-8561-42010A800005';
-            const sensorIds = ['27659', '178323', '223765'];
-            const sensorNames = ['Cloverdale', 'Riverdale', 'Gallagher Park'];
+            const sensorIds = ['53215', '224243', '224259'];         
+            const sensorNames = ['Centennial Park', 'Outdoor Poor', 'Public Works'];
             const purpleAirUrl = `https://api.purpleair.com/v1/sensors?fields=last_seen,humidity,pm2.5_60minute,pm2.5_10minute&show_only=${sensorIds.join(',')}`;
             function adjustPm25(pm25, humidity) {
                 let adjustedPm25 = pm25;
@@ -147,14 +147,14 @@
         window.addEventListener('message', (event) => {
             if (event.data === 'ready') {
                 fetchCommunityAQHI();
-                fetchMccauleyAQHI();
+                fetchgeneseeAQHI();
                 fetchPurpleAirData();
             }
         });
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchCommunityAQHI();
-            fetchMccauleyAQHI();
+            fetchgeneseeAQHI();
             fetchPurpleAirData();
         });
     </script>
