@@ -35,7 +35,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         // Initialize the map
-        const map = L.map('map').setView([53.3666806,-113.7179945], 13);
+        const map = L.map('map').setView([53.366737,-113.7184], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -89,9 +89,9 @@
                 addStationToMap(53.3033, -114.2016, data.Aqhi, "Genesee", new Date(data.ReadingDate).toLocaleString());
             } else if (type === 'purpleair') {
                 const sensorLocations = {
-                    '53215': {coords: [53.3666806,-113.7179945], name: 'Centennial Park'},
-                    '224243': {coords: [53.3626185,-113.7260409], name: 'Outdoor Pool'},
-                    '224259': {coords: [53.3448816,-113.7256529], name: 'Public Works'}
+                    '53215': {coords: [53.366737,-113.7184], name: 'Centennial Park'},
+                    '224243': {coords: [53.36261,-113.72619], name: 'Outdoor Pool'},
+                    '224259': {coords: [53.34485,-113.72582], name: 'Public Works'}
                 };
 
                 // Check for ID and name match			
