@@ -86,12 +86,12 @@
             const { type, data } = event.data;
             console.log(`Received from parent: ${type}`, data);  // Log the received data
             if (type === 'mccauley') {
-                addStationToMap(53.549509, -113.48593, data.Aqhi, "Edmonton McCauley", new Date(data.ReadingDate).toLocaleString());
+                addStationToMap(53.3033, -114.2016, data.Aqhi, "Genesee", new Date(data.ReadingDate).toLocaleString());
             } else if (type === 'purpleair') {
                 const sensorLocations = {
-                    '53215': {coords: [53.36359, -113.68521], name: 'Centennial Park'},
-                    '224243': {coords: [53.36359, -113.68521], name: 'Outdoor Pool'},
-                    '224259': {coords: [53.36359, -113.68521], name: 'Public Works'}
+                    '53215': {coords: [53.3666806,-113.7179945], name: 'Centennial Park'},
+                    '224243': {coords: [53.3626185,-113.7260409], name: 'Outdoor Pool'},
+                    '224259': {coords: [53.3448816,-113.7256529], name: 'Public Works'}
                 };
 
                 // Check for ID and name match			
