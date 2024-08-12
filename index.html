@@ -64,18 +64,18 @@
             }
         }
 
-        // Fetch Genesee genesee AQHI data
+        // Fetch Genesee AQHI data
         async function fetchgeneseeAQHI() {
             const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const GeneseegeneseeData = data.value.find(station => station.StationName === "Genesee");
-                if (GeneseegeneseeData) {
-                    const validatedAQHI = validateAQHI(GeneseegeneseeData.Aqhi);
+                const GeneseeData = data.value.find(station => station.StationName === "Genesee");
+                if (GeneseeData) {
+                    const validatedAQHI = validateAQHI(GeneseeData.Aqhi);
                     document.getElementById('geneseeAqhi').innerText = `AQHI: ${validatedAQHI}`;
-                    document.getElementById('geneseeReadingDate').innerText = new Date(GeneseegeneseeData.ReadingDate).toLocaleString();
-                    sendToMap('genesee', {...GeneseegeneseeData, Aqhi: validatedAQHI });
+                    document.getElementById('geneseeReadingDate').innerText = new Date(GeneseeData.ReadingDate).toLocaleString();
+                    sendToMap('genesee', {...GeneseeData, Aqhi: validatedAQHI });
                 }
             } catch (error) {
                 console.error('Error fetching genesee AQHI data:', error);
