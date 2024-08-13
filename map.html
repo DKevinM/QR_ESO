@@ -87,15 +87,10 @@
             console.log(`Received from parent: ${type}`, data);  // Log the received data
             if (type === 'genesee') {
                 addStationToMap(53.3033, -114.2016, data.Aqhi, "Genesee", new Date(data.ReadingDate).toLocaleString());
-
-                
-        } else if (type === 'leduc') {
-            addStationToMap(53.241986, -113.503280, data.Aqhi, "Leduc (Sensor)", new Date(data.ReadingDate).toLocaleString());
-        } else if (type === 'lendrum') {
-            addStationToMap(53.497784 , -113.527011, data.Aqhi, "Edmonton Lendrum", new Date(data.ReadingDate).toLocaleString());
-        } else if (type === 'purpleair') {
-                
-                
+            } else if (type === 'leduc') {
+                addStationToMap(53.241986, -113.503280, data.Aqhi, "Leduc (Sensor)", new Date(data.ReadingDate).toLocaleString());
+            } else if (type === 'lendrum') {
+                addStationToMap(53.497784 , -113.527011, data.Aqhi, "Edmonton Lendrum", new Date(data.ReadingDate).toLocaleString());
             } else if (type === 'purpleair') {
                 const sensorLocations = {
                     '53215': {coords: [53.366737,-113.7184], name: 'Centennial Park'},
