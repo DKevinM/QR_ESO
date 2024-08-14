@@ -61,8 +61,8 @@
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const edmontonCommunityData = data.value.find(community => community.CommunityName === "Genesee");
-                if (edmontonCommunityData) {
+                const GeneseeCommunityData = data.value.find(community => community.CommunityName === "Genesee");
+                if (GeneseeCommunityData) {
                     document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(GeneseeCommunityData.Aqhi)}`;
                     document.getElementById('communityReadingDate').innerText = new Date(GeneseeCommunityData.ReadingDate).toLocaleString();
                     document.getElementById('communityForecastToday').innerText = `Forecast Today: ${validateForecast(GeneseeCommunityData.ForecastToday)}`;
