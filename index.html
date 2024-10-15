@@ -16,19 +16,25 @@
 <body>
     <div class="container">
         <h1>Jasper Community AQHI</h1>
-        <div id="communityAqhi" class="communityAqhi">Loading Community AQHI...</div>
-        <div id="communityReadingDate" class="communityAqhi"></div>
+        <div id="communityAqhi1" class="communityAqhi1">Loading Jasper AQHI...</div>
+        <div id="communityReadingDate1" class="communityAqhi1"></div>
         <!--<div id="communityForecastToday" class="communityAqhi"></div>
         <div id="communityForecastTonight" class="communityAqhi"></div>
         <div id="communityForecastTomorrow" class="communityAqhi"></div>-->
 
-        <h1>Jasper Sensor AQHI</h1>
-        <div id="JasperAqhi" class="aqhi">Loading Jasper Station AQHI...</div>
-        <div id="JasperReadingDate" class="aqhi"></div>
+        <h1>Hinton Community AQHI</h1>
+        <div id="communityAqhi2" class="communityAqhi2">Loading Hinton AQHI...</div>
+        <div id="communityReadingDate2" class="communityAqhi2"></div>
+        <div id="communityForecastToday" class="communityAqhi2"></div>
+        <div id="communityForecastTonight" class="communityAqhi2"></div>
+        <div id="communityForecastTomorrow" class="communityAqhi2"></div>
 
-        <h1>Steeper Station AQHI</h1>
-        <div id="SteeperAqhi" class="aqhi">Loading AQHI...</div>
-        <div id="SteeperReadingDate" class="aqhi"></div>
+        <h1>Steeper AQHI</h1>
+        <div id="communityAqhi3" class="communityAqhi3">Loading Steeper AQHI...</div>
+        <div id="communityReadingDate3" class="communityAqhi3"></div>
+        <!--<div id="communityForecastToday" class="communityAqhi3"></div>
+        <div id="communityForecastTonight" class="communityAqhi3"></div>
+        <div id="communityForecastTomorrow" class="communityAqhi3"></div>-->
 
         <h1>PurpleAir Sensors</h1>
         <div id="purpleAirData1" class="purpleair">Loading PurpleAir Data for Sensor 1...</div>
@@ -59,74 +65,80 @@
             return timestamp < twoHoursAgo;
         }
                 
-        // Fetch Community AQHI data
-        async function fetchCommunityAQHI() {
+        // Fetch Community AQHI data1
+        async function fetchCommunityAQHI1() {
             const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/CommunityAqhis?$format=json";
             try {
                 const response = await fetch(url);
                 const data = await response.json();
                 const JasperCommunityData = data.value.find(community => community.CommunityName === "Jasper");
                 if (JasperCommunityData) {
-                    document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(JasperCommunityData.Aqhi)}`;
-                    document.getElementById('communityReadingDate').innerText = new Date(JasperCommunityData.ReadingDate).toLocaleString();
-                    document.getElementById('communityForecastToday').innerText = `Forecast Today: ${validateForecast(JasperCommunityData.ForecastToday)}`;
-                    document.getElementById('communityForecastTonight').innerText = `Forecast Tonight: ${validateForecast(JasperCommunityData.ForecastTonight)}`;
-                    document.getElementById('communityForecastTomorrow').innerText = `Forecast Tomorrow: ${validateForecast(JasperCommunityData.ForecastTomorrow)}`;
+                    const aqhiValue1 = validateAQHI(JasperCommunityData.Aqhi);
+                    const readingDate1 = new Date(JasperCommunityData.ReadingDate).toLocaleString();
+                    document.getElementById('communityAqhi1').innerText = `AQHI: ${aqhiValue1}`;
+                    document.getElementById('communityReadingDate1').innerText = readingDate1;
+                // Send data to the map
+                    sendToMap('communityaqhi1', {
+                        name: 'Jasper',
+                        aqhi: aqhiValue1,
+                        readingDate: readingDate1
+                    });
+                        }
+                    } catch (error) {
+                        console.error('Error fetching Community AQHI data:', error);
+                    }
                 }
-            } catch (error) {
-                console.error('Error fetching Community AQHI data:', error);
-            }
-        }
 
-        // Fetch Jasper AQHI data
-        async function fetchJasperAQHI() {
-            const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
+        // Fetch Community AQHI data2
+        async function fetchCommunityAQHI2() {
+            const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/CommunityAqhis?$format=json";
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const JasperData = data.value.find(station => station.StationName === "Jasper");
-                if (JasperData) {
-                    const validatedAQHI = validateAQHI(JasperData.Aqhi);
-                    document.getElementById('JasperAqhi').innerText = `AQHI: ${validatedAQHI}`;
-                    document.getElementById('JasperReadingDate').innerText = new Date(JasperData.ReadingDate).toLocaleString();
-                    sendToMap('Jasper', {...JasperData, Aqhi: validatedAQHI });
+                const HintonCommunityData = data.value.find(community => community.CommunityName === "Hinton");
+                if (HintonCommunityData) {
+                    const aqhiValue2 = validateAQHI(HintonCommunityData.Aqhi);
+                    const readingDate2 = new Date(HintonCommunityData.ReadingDate).toLocaleString();
+                    document.getElementById('communityAqhi2').innerText = `AQHI: ${aqhiValue2}`;
+                    document.getElementById('communityReadingDate2').innerText = readingDate2;
+                // Send data to the map
+                    sendToMap('communityaqhi2', {
+                        name: 'Hinton',
+                        aqhi: aqhiValue2,
+                        readingDate: readingDate2
+                    });
+                        }
+                    } catch (error) {
+                        console.error('Error fetching Community AQHI data:', error);
+                    }
                 }
-            } catch (error) {
-                console.error('Error fetching Jasper AQHI data:', error);
-            }
-        }
 
-    // Function to fetch and send Hinton (Sensor) AQHI data to the map
-    async function fetchHintonAQHI() {
-        const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            const HintonData = data.value.find(station => station.StationName === "Hinton-Hillcrest");
-            if (HintonData) {
-                const validatedAQHI = validateAQHI(HintonData.Aqhi);
-                sendToMap('Hinton', {...HintonData, Aqhi: validatedAQHI });
-            }
-        } catch (error) {
-            console.error('Error fetching Hinton AQHI data:', error);
-        }
-    }
 
-    // Function to fetch and send Edmonton Steeper AQHI data to the map
-    async function fetchSteeperAQHI() {
-        const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            const SteeperData = data.value.find(station => station.StationName === "Steeper");
-            if (SteeperData) {
-                const validatedAQHI = validateAQHI(SteeperData.Aqhi);
-                sendToMap('Steeper', {...SteeperData, Aqhi: validatedAQHI });
-            }
-        } catch (error) {
-            console.error('Error fetching Steeper AQHI data:', error);
-        }
-    }
+
+        // Fetch Community AQHI data3
+        async function fetchCommunityAQHI3() {
+            const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/CommunityAqhis?$format=json";
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const SteeperCommunityData = data.value.find(community => community.CommunityName === "Steeper");
+                if (SteeperCommunityData) {
+                    const aqhiValue3 = validateAQHI(SteeperCommunityData.Aqhi);
+                    const readingDate3 = new Date(SteeperCommunityData.ReadingDate).toLocaleString();
+                    document.getElementById('communityAqhi3').innerText = `AQHI: ${aqhiValue3}`;
+                    document.getElementById('communityReadingDate3').innerText = readingDate3;
+                // Send data to the map
+                    sendToMap('communityaqhi3', {
+                        name: 'Steeper',
+                        aqhi: aqhiValue3,
+                        readingDate: readingDate3
+                    });
+                        }
+                    } catch (error) {
+                        console.error('Error fetching Community AQHI data:', error);
+                    }
+                }
+
 
         // Fetch and process PurpleAir data
         async function fetchPurpleAirData() {
@@ -196,20 +208,18 @@
 
         window.addEventListener('message', (event) => {
             if (event.data === 'ready') {
-                fetchCommunityAQHI();
-                fetchJasperAQHI();
+                fetchCommunityAQHI1();
+                fetchCommunityAQHI2();
+                fetchCommunityAQHI3();
                 fetchPurpleAirData();
-                fetchHintonAQHI();
-                fetchSteeperAQHI();
             }
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetchCommunityAQHI();
-            fetchJasperAQHI();
-            fetchPurpleAirData();
-            fetchHintonAQHI();
-            fetchSteeperAQHI();
+                fetchCommunityAQHI1();
+                fetchCommunityAQHI2();
+                fetchCommunityAQHI3();
+                fetchPurpleAirData();
         });
     </script>
 </body>
