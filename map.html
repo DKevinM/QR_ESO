@@ -35,7 +35,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         // Initialize the map
-        const map = L.map('map').setView([53.366737,-113.7184], 13);
+        const map = L.map('map').setView([52.875847,-118.080980], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -87,17 +87,16 @@
         window.addEventListener('message', (event) => {
             const { type, data } = event.data;
             console.log(`Received from parent: ${type}`, data);  // Log the received data
-            if (type === 'genesee') {
-                addStationToMap(53.3033, -114.2016, data.Aqhi, "Genesee", new Date(data.ReadingDate).toLocaleString());
-            } else if (type === 'leduc') {
-                addStationToMap(53.241986, -113.503280, data.Aqhi, "Leduc (Sensor)", new Date(data.ReadingDate).toLocaleString());
-            } else if (type === 'lendrum') {
-                addStationToMap(53.497784 , -113.527011, data.Aqhi, "Edmonton Lendrum", new Date(data.ReadingDate).toLocaleString());
+            if (type === 'Jasper') {
+                addStationToMap( 52.876536, -118.080232, data.Aqhi, "Jasper", new Date(data.ReadingDate).toLocaleString());
+            } else if (type === 'Hinton') {
+                addStationToMap( 53.398344, -117.588483, data.Aqhi, "Hinton", new Date(data.ReadingDate).toLocaleString());
+            } else if (type === 'Steeper') {
+                addStationToMap(53.1325994 , -117.091395, data.Aqhi, "Steeper", new Date(data.ReadingDate).toLocaleString());
             } else if (type === 'purpleair') {
                 const sensorLocations = {
-                    '53215': {coords: [53.366737,-113.7184], name: 'Centennial Park'},
-                    '224243': {coords: [53.36261,-113.72619], name: 'Outdoor Pool'},
-                    '224259': {coords: [53.34485,-113.72582], name: 'Public Works'}
+                    '91675': {coords: [52.873885,-118.07428], name: 'Jasper1'},
+                    '156679': {coords: [52.87667,-118.084785], name: 'Jasper4'}
                 };
 
                 // Check for ID and name match			
