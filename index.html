@@ -20,11 +20,11 @@
         <div id="communityReadingDate" class="communityAqhi"></div>
         <!--<div id="communityForecastToday" class="communityAqhi"></div>
         <div id="communityForecastTonight" class="communityAqhi"></div>
-        <div id="communityForecastTomorrow" class="communityAqhi"></div>-->
+        <div id="communityForecastTomorrow" class="communityAqhi"></div>
 
         <h1>Steeper AQHI</h1>
         <div id="SteeperAqhi" class="aqhi">Loading AQHI...</div>
-        <div id="SteeperReadingDate" class="aqhi"></div>
+        <div id="SteeperReadingDate" class="aqhi"></div>-->
 
         <h1>PurpleAir Sensors</h1>
         <div id="purpleAirData1" class="purpleair">Loading PurpleAir Data for Sensor 1...</div>
@@ -98,7 +98,7 @@
         try {
             const response = await fetch(url);
             const data = await response.json();
-            const HintonData = data.value.find(station => station.StationName === "Hinton");
+            const HintonData = data.value.find(station => station.StationName === "Hinton-Hillcrest");
             if (HintonData) {
                 const validatedAQHI = validateAQHI(HintonData.Aqhi);
                 sendToMap('Hinton', {...HintonData, Aqhi: validatedAQHI });
@@ -195,6 +195,8 @@
                 fetchCommunityAQHI();
                 fetchJasperAQHI();
                 fetchPurpleAirData();
+                fetchHintonAQHI();
+                fetchSteeperAQHI();
             }
         });
 
