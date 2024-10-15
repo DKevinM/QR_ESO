@@ -88,11 +88,11 @@
             const { type, data } = event.data;
             console.log(`Received from parent: ${type}`, data);  // Log the received data
             if (type === 'Jasper') {
-                addStationToMap(52.873528, -118.09144, aqhiValue1, "Jasper", new Date(data.ReadingDate1).toLocaleString());
+                addStationToMap(52.873528, -118.09144, data.aqhiValue1, "Jasper", new Date(data.readingDate1).toLocaleString());
             } else if (type === 'Hinton') {
-                addStationToMap(53.398344, -117.588483, aqhiValue2, "Hinton", new Date(data.ReadingDate2).toLocaleString());
+                addStationToMap(53.398344, -117.588483, data.aqhiValue2, "Hinton", new Date(data.readingDate2).toLocaleString());
             } else if (type === 'Steeper') {
-                addStationToMap(53.1325994 , -117.091395, aqhiValue3, "Steeper", new Date(data.ReadingDate3).toLocaleString());
+                addStationToMap(53.1325994 , -117.091395, data.aqhiValue3, "Steeper", new Date(data.readingDate3).toLocaleString());
             } else if (type === 'purpleair') {
                 const sensorLocations = {
                     '91675': {coords: [52.873885,-118.07428], name: 'Jasper1'},
