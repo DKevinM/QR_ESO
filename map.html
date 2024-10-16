@@ -90,9 +90,9 @@
             if (type === 'Jasper' && data.aqhi && data.readingDate) {
                 addStationToMap(52.873528, -118.09144, data.aqhi, "Jasper", data.readingDate);
             } else if (type === 'Hinton' && data.aqhi && data.readingDate) {
-                addStationToMap(53.398344, -117.588483, data.aqhi, "Hinton", (data.readingDate).toLocaleString());
+                addStationToMap(53.398344, -117.588483, data.aqhi, "Hinton", data.readingDate);
             } else if (type === 'Steeper' && data.aqhi && data.readingDate) {
-                addStationToMap(53.1325994 , -117.091395, data.aqhi, "Steeper", (data.readingDate).toLocaleString());
+                addStationToMap(53.1325994 , -117.091395, data.aqhi, "Steeper", data.readingDate);
             } else if (type === 'purpleair') {
                 const sensorLocations = {
                     '91675': {coords: [52.873885,-118.07428], name: 'Jasper1'},
