@@ -88,7 +88,7 @@
             const { type, data } = event.data;
             console.log(`Received from parent: ${type}`, data);  // Log the received data
             if (type === 'Jasper' && data.aqhi && data.readingDate) {
-                addStationToMap(52.873528, -118.09144, data.aqhi, "Jasper", (data.readingDate).toLocaleString());
+                addStationToMap(52.873528, -118.09144, data.aqhi, "Jasper", data.readingDate);
             } else if (type === 'Hinton' && data.aqhi && data.readingDate) {
                 addStationToMap(53.398344, -117.588483, data.aqhi, "Hinton", (data.readingDate).toLocaleString());
             } else if (type === 'Steeper' && data.aqhi && data.readingDate) {
